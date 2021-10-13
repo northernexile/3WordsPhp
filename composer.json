@@ -1,0 +1,48 @@
+{
+    "name": "northernexile/3words-php",
+    "description": "Custom Php API wrapper for what 3 words",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Allen Hardy",
+            "email": "anarchalien@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "7.4.x-dev",
+        "illuminate/support": "8.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.8",
+        "orchestra/testbench": "9999999-dev",
+        "mockery/mockery": "1.4.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Northernexile\\ThreeWords\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Northernexile\\ThreeWords\\ThreeWordsServiceProvider"
+            ],
+            "aliases": {
+                "Debugbar": "Northernexile\\ThreeWords\\Facade"
+            }
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    }
+}
