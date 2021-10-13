@@ -80,13 +80,23 @@ abstract class AbstractClient
     {
         $url = $this->getUrl().'?';
         $this->addParameter('key',$this->apiKey);
-        $url.=http_build_query($this->parameters);
 
-        $this->response = $this->client->get(
-            $url
-        );
+        $config = [];
 
-        logger()->error($this->getResponse());
+        foreach ($this->parameters as $key=>$value){
+            $config[] = "{$key}={$value}";
+        }
+
+        $url.=implode('&',$config);
+
+        try {
+            $this->response = $this->client->get(
+                $url
+            );
+        } catch (\Throwable $throwable){
+            \logger()->error($throwable->getMessage());
+            $this->response = $throwable->getMessage();
+        }
     }
 
     private function post()
@@ -99,6 +109,7 @@ abstract class AbstractClient
      */
     public function getResponse() :array
     {
+
         if(is_null($this->response) || empty($this->response)){
             throw new \Exception('No API Response');
         }
@@ -126,7 +137,7 @@ abstract class AbstractClient
      */
     public function addParameter(string $key,string $value) :void
     {
-        array_push($this->parameters,[$key=>$value]);
+        $this->parameters[$key]=$value;
     }
 
     /**

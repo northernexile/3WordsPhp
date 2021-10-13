@@ -44,4 +44,15 @@ final class ConvertToThreeWordAddress
 
         return $this;
     }
+
+    /**
+     * @return AbstractClient
+     * @throws \Exception
+     */
+    public function request(): AbstractClient
+    {
+        $this->addParameter('coordinates',$this->latitude.','.$this->longitude);
+
+        return parent::request();
+    }
 }
