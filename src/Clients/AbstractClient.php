@@ -85,6 +85,8 @@ abstract class AbstractClient
         $this->response = $this->client->get(
             $url
         );
+
+        logger()->error($this->getResponse());
     }
 
     private function post()
@@ -103,6 +105,8 @@ abstract class AbstractClient
 
         if($this->response->getStatusCode() == 200){
             return \json_decode($this->response->getBody());
+        } else{
+            logger()->error('3 Words API failure',\json_decode($this->response->getBody()));
         }
     }
 
