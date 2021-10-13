@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.3|^8.0",
-        "guzzlehttp/guzzle": "7.4.x-dev",
+        "guzzlehttp/guzzle": "7.3.*",
         "illuminate/support": "8.x-dev"
     },
     "require-dev": {

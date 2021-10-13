@@ -5,6 +5,7 @@ namespace Northernexile\ThreeWords;
 
 
 use Illuminate\Support\ServiceProvider;
+use Northernexile\ThreeWords\Requests\ConvertToThreeWordAddress;
 
 /**
  * Class ThreeWordsServiceProvider
@@ -19,7 +20,13 @@ class ThreeWordsServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        app()->bind('ThreeWords',function (){
+            return new ThreeWords(
+                new ConvertToThreeWordAddress(
+                    new \GuzzleHttp\Client()
+                )
+            );
+        });
     }
 
     public function boot()
