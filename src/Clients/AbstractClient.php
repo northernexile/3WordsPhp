@@ -78,13 +78,12 @@ abstract class AbstractClient
 
     private function get()
     {
-        $url = $this->getUrl();
+        $url = $this->getUrl().'?';
         $this->addParameter('key',$this->apiKey);
+        $url.=http_build_query($this->parameters);
 
         $this->response = $this->client->get(
-            $url,[
-                'query'=>$this->parameters
-            ]
+            $url
         );
     }
 
