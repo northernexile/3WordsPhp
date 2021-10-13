@@ -115,9 +115,9 @@ abstract class AbstractClient
         }
 
         if($this->response->getStatusCode() == 200){
-            return \json_decode($this->response->getBody());
+            return \json_decode($this->response->getBody(),true);
         } else{
-            logger()->error('3 Words API failure',\json_decode($this->response->getBody()));
+            logger()->error('3 Words API failure',\json_decode($this->response->getBody(),true));
         }
     }
 
