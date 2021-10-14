@@ -4,8 +4,10 @@
 namespace Northernexile\ThreeWords;
 
 
+use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 use Northernexile\ThreeWords\Requests\ConvertToThreeWordAddress;
+use Northernexile\ThreeWords\Requests\GridSection;
 
 /**
  * Class ThreeWordsServiceProvider
@@ -21,9 +23,14 @@ class ThreeWordsServiceProvider extends ServiceProvider
     public function register()
     {
         app()->bind('ThreeWords',function (){
+            $client = new Client();
+
             return new ThreeWords(
                 new ConvertToThreeWordAddress(
-                    new \GuzzleHttp\Client()
+                    $client
+                ),
+                new GridSection(
+                    $client
                 )
             );
         });
