@@ -22,6 +22,7 @@ class ThreeWords
     /**
      * ThreeWords constructor.
      * @param ConvertToThreeWordAddress $convertToThreeWordAddress
+     * @param GridSection $gridSection
      */
     public function __construct(
         ConvertToThreeWordAddress $convertToThreeWordAddress,
